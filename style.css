@@ -32,7 +32,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 10px 10px;
+  margin-bottom: 10px;
 }
 
 .unit {
@@ -81,12 +81,13 @@ p {
 
 @media(max-width: 767px) {
   .exam {
-    padding: 0 0 15px;
+    padding: 0 15px;
     position: inherit;
   }
 
   .unit {
     margin: 5px;
+    font-size: 15px;
   }
 
   .done {
