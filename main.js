@@ -10,26 +10,53 @@ var subjects_dates = [
 
 var subjects_ara = ["مفاعلات ومعجلات", "تحليل نظم", "إلكترونيات 2", "شبكات عصبية", "ذكاء اصطناعى متقدم", "فيزياء الليزر", "مشروع التخرج"];
 var subjects_eng = ["Reactors and Accelerators", "Systems Analysis", "Electronics 2", "Neural Networks", "Advanced Artificial Intelligence", "Laser Physics", "Graduation Project"]
+var body = document.querySelector('body');
 
-var div_dates = document.querySelectorAll(".date");
+
+function div_ele(eng, arabic, date) {
+    let div_info = `
+    <div class="exam one">
+    <h2>${eng}</h2>
+    <p class="arabic">${arabic}</p>
+    <div class="date">${date}</div>
+    <div class="time">
+        <div class="unit">
+            <span class="days"></span>
+            <span>Days</span>
+        </div>
+        <div class="unit">
+            <span class="hours"></span>
+            <span>Hours</span>
+        </div>
+        <div class="unit">
+            <span class="minutes"></span>
+            <span>Minutes</span>
+        </div>
+        <div class="unit">
+            <span class="seconds"></span>
+            <span>Seconds</span>
+        </div>
+    </div>
+    <div class="done">It's Over</div>
+    </div>
+    `;
+    return div_info;
+}
+
+for (let i = 0; i < subjects_ara.length; i++) {
+    let div_new = document.createElement('div');
+    div_new.innerHTML = div_ele(subjects_eng[i], subjects_ara[i], new Date(subjects_dates[i]).toLocaleString('en-GB'));
+    body.appendChild(div_new);
+}
+
 var d = document.querySelectorAll(".unit .days");
 var h = document.querySelectorAll(".unit .hours");
 var m = document.querySelectorAll(".unit .minutes");
 var s = document.querySelectorAll(".unit .seconds");
-var subjects_p_ara = document.querySelectorAll(".arabic");
-var subjects_h2_eng = document.querySelectorAll("h2");
-
-for (let i = 0; i < subjects_p_ara.length; i++) {
-    subjects_p_ara[i].innerHTML = subjects_ara[i];
-    subjects_h2_eng[i].innerHTML = subjects_eng[i];
-    div_dates[i].innerHTML = new Date(subjects_dates[i]).toLocaleString('en-GB');
-}
-
-
 (function() {
 
     let counter = setInterval(() => {
-        for (var i = 0; i < subjects_dates.length; i++) {
+        for (let i = 0; i < subjects_dates.length; i++) {
             let dateNow = new Date().getTime();
             let dateDiff = subjects_dates[i] - dateNow;
 
