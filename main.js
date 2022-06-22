@@ -12,6 +12,8 @@ var subjects_ara = ["مفاعلات ومعجلات", "تحليل نظم", "إل�
 var subjects_eng = ["Reactors and Accelerators", "Systems Analysis", "Electronics 2", "Neural Networks", "Advanced Artificial Intelligence", "Laser Physics", "Graduation Project"]
 var body = document.querySelector('body');
 
+var overlay_div = document.querySelector('.overlay');
+var subjects_finished = 0;
 
 function div_ele(eng, arabic, date) {
     let div_info = `
@@ -65,19 +67,18 @@ var s = document.querySelectorAll(".unit .seconds");
             let minutes = Math.floor((dateDiff % (1000 * 60 * 60)) / 1000 / 60);
             let seconds = Math.floor((dateDiff % (1000 * 60)) / 1000);
 
-            d[i].innerHTML = days;
-            h[i].innerHTML = hours;
-            m[i].innerHTML = minutes;
-            s[i].innerHTML = seconds < 10 ? `0${seconds}` : seconds;
-
+            d[i].innerHTML = days < 0 ? "00" : days;
+            h[i].innerHTML = hours < 0 ? "00" : hours;
+            m[i].innerHTML = minutes < 0 ? "00" : minutes;
+            s[i].innerHTML = seconds < 0 ? "00" : seconds
             if (dateDiff < 0) {
-                d[i].innerHTML = 00;
-                h[i].innerHTML = 00;
-                m[i].innerHTML = 00;
-                s[i].innerHTML = 00;
-                document.querySelectorAll(".done")[i].style.display = "flex"
+                document.querySelectorAll(".done")[i].style.display = "flex";
+                subjects_finished++;
             }
         }
-
+        if (subjects_finished == subjects_ara.length) {
+            overlay_div.style.display = "block";
+            clearInterval(counter);
+        }
     }, 1000);
 })();
